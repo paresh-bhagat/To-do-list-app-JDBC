@@ -1,4 +1,4 @@
-# TaskBox a To-Do list app in Java with MySQL
+# TaskBox a To-do list app in Java with MySQL
 
 A To-Do List app using java. User can create account, login, add tasks, change or delete tasks, change password and delete account.
 
