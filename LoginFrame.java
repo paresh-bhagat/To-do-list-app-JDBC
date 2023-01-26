@@ -31,7 +31,7 @@ public class LoginFrame extends JFrame {
 
         // panel1
 
-        panel1.setBackground(new Color(174, 138, 231));
+        panel1.setBackground(new Color(157, 168, 231));
         panel1.setBounds(0,0,600,720);
         panel1.setLayout(null);
         panel1.add(text_label1);
@@ -77,7 +77,7 @@ public class LoginFrame extends JFrame {
         button_login.setBorder(null);
         button_login.setFocusable(false);
         button_login.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        button_login.setBackground(new Color(241, 208, 214));
+        button_login.setBackground(new Color(236, 241, 240, 255));
 
         button_login.setIcon(img_login);
 
@@ -94,7 +94,7 @@ public class LoginFrame extends JFrame {
         button_register.setBorder(null);
         button_register.setFocusable(false);
         button_register.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        button_register.setBackground(new Color(241, 208, 214));
+        button_register.setBackground(new Color(236, 241, 240, 255));
         button_register.setIcon(img_register);
 
         // Wrong username or password
@@ -107,7 +107,7 @@ public class LoginFrame extends JFrame {
 
         // panel2
 
-        panel2.setBackground(new Color(241, 208, 214));
+        panel2.setBackground(new Color(236, 241, 240, 255));
         panel2.setBounds(600,0,480,720);
         panel2.setLayout(null);
         panel2.add(text_gs);

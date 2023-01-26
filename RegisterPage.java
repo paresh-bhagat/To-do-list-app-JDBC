@@ -49,7 +49,7 @@ public class RegisterPage extends JPanel{
         button_newregister.setBorder(null);
         button_newregister.setFocusable(false);
         button_newregister.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        button_newregister.setBackground(new Color(241, 208, 214));
+        button_newregister.setBackground(new Color(236, 241, 240, 255));
         button_newregister.setIcon(img_register);
 
         //  username already taken
@@ -74,10 +74,10 @@ public class RegisterPage extends JPanel{
         button_loginmenu.setBorder(null);
         button_loginmenu.setFocusable(false);
         button_loginmenu.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        button_loginmenu.setBackground(new Color(241, 208, 214));
+        button_loginmenu.setBackground(new Color(236, 241, 240, 255));
         button_loginmenu.setIcon(img_mainmenu);
 
-        this.setBackground(new Color(241, 208, 214));
+        this.setBackground(new Color(236, 241, 240, 255));
         this.setBounds(0,0,1080,720);
         this.setLayout(null);
         this.add(text_createaccount);

@@ -117,7 +117,7 @@ public class TaskEdit extends JPanel{
         button_backmenu.setBorder(null);
         button_backmenu.setFocusable(false);
         button_backmenu.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        button_backmenu.setBackground(new Color(241, 208, 214));
+        button_backmenu.setBackground(new Color(157, 168, 231));
         button_backmenu.setIcon(img_back);
 
         // save button
@@ -126,7 +126,7 @@ public class TaskEdit extends JPanel{
         button_save.setBorder(null);
         button_save.setFocusable(false);
         button_save.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        button_save.setBackground(new Color(241, 208, 214));
+        button_save.setBackground(new Color(157, 168, 231));
         button_save.setIcon(img_save);
 
         // delete button
@@ -135,7 +135,7 @@ public class TaskEdit extends JPanel{
         button_deletetask.setBorder(null);
         button_deletetask.setFocusable(false);
         button_deletetask.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        button_deletetask.setBackground(new Color(241, 208, 214));
+        button_deletetask.setBackground(new Color(157, 168, 231));
         button_deletetask.setIcon(img_delete);
 
         if (task.equals("Enter task name")) {
@@ -158,7 +158,7 @@ public class TaskEdit extends JPanel{
         text_taskdeleted.setFont(new Font("Futura",Font.ITALIC,15));
         text_taskdeleted.setBounds(500,650, 100,20);
 
-        this.setBackground(new Color(241, 208, 214));
+        this.setBackground(new Color(157, 168, 231));
         this.setBounds(0,0,1080,720);
         this.setLayout(null);
         this.add(text_Task);

@@ -11,7 +11,7 @@ public class TaskButton extends JButton{
         this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.setHorizontalTextPosition(JButton.CENTER);
         this.setVerticalTextPosition(JButton.BOTTOM);
-        this.setBackground(new Color(245, 241, 243));
+        this.setBackground(new Color(236, 241, 240, 255));
         this.setIcon( imtask );
     }
 }

@@ -27,7 +27,7 @@ public class ChangePassword extends JPanel {
         button_changepassword.setBorder(null);
         button_changepassword.setFocusable(false);
         button_changepassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        button_changepassword.setBackground(new Color(241, 208, 214));
+        button_changepassword.setBackground(new Color(236, 241, 240, 255));
         button_changepassword.setIcon(img_ok);
 
         // registered
@@ -44,10 +44,10 @@ public class ChangePassword extends JPanel {
         button_back.setBorder(null);
         button_back.setFocusable(false);
         button_back.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        button_back.setBackground(new Color(241, 208, 214));
+        button_back.setBackground(new Color(236, 241, 240, 255));
         button_back.setIcon(img_back);
 
-        this.setBackground(new Color(241, 208, 214));
+        this.setBackground(new Color(236, 241, 240, 255));
         this.setBounds(0,0,1080,720);
         this.setLayout(null);
         this.add(text_newpwd);
