@@ -13,11 +13,10 @@ A To-Do List app using java. User can create account, login, add tasks, change o
 
 ## How to run
 ```
-Run Main.java in your IDE.
-```
-In Linux
-```
-javac Main.java
+* Add jar file to your project (included in lib directory).
+* Open MySQL create a database named to_do_list_app. Create table user_info (2 columns user_id( primary key) and user_passsword )
+* In Main.java. Change getConnection object parameters to your url, username and password in main function. 
+* Run Main.java in your IDE.
 ```
 ## Images
 
