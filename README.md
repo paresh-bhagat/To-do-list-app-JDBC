@@ -20,12 +20,12 @@ javac Main.java
 
 * Login page
 
-![Login](home.jpg)
+![Login](home.PNG)
 
 * Register
 
-![Register](create_Account.jpg)
+![Register](create_Account.PNG)
 
 * View and add Task
 
-![Register](Task.jpg)
+![Register](Task.PNG)
