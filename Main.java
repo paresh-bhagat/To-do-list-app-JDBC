@@ -448,15 +448,20 @@ public class Main {
         // go back to task_page
         change_panel.button_back.addActionListener( e -> { change_panel.setVisible(false); task_page(usr_name);} );
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
 
         // connnect to to-do-app-list-database
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/to_do_list_app","root","GMb123!");
+            Class.forName("com.mysql.jdbc.Driver");
+            String mysql_url = "jdbc:mysql://localhost:3306/to_do_list_app";
+            String mysql_username = "root";
+            String mysql_password = "GMb123!";
+            connection = DriverManager.getConnection( mysql_url,mysql_username,mysql_password);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        
 
         // set action for login and register button
 
