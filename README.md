@@ -34,6 +34,7 @@ A To-Do List app using java. User can create account, login, add tasks, change o
 * first export the jar file - export CLASSPATH="/path/to/file":${CLASSPATH}
 * Compile - javac Main.java
 * Run - java Main
+```
 
 ## Images
 
