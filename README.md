@@ -22,6 +22,19 @@ A To-Do List app using java. User can create account, login, add tasks, change o
 * Run Main.java in your IDE.
 ```
 
+* Ubuntu
+
+```
+* Install mysql-server : sudo apt-get install mysql-server
+* Start mysql : sudo mysql -u root -p ( password - root)
+* To create database : CREATE DATABASE to_do_list_app;
+* Connect to database : connect to_do_list_app;
+* Create user_info table : CREATE TABLE user_info( user_id varchar(20), user_password varchar(20), PRIMARY KEY (user_id));
+* Now that table is created lets start the app
+* first export the jar file - export CLASSPATH="/path/to/file":${CLASSPATH}
+* Compile - javac Main.java
+* Run - java Main
+
 ## Images
 
 * Login page
