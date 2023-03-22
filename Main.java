@@ -1,6 +1,8 @@
 import java.sql.*;
 import java.util.concurrent.TimeUnit;
 
+import javax.imageio.plugins.tiff.ExifGPSTagSet;
+
 public class Main {
     static LoginFrame frame = new LoginFrame();
     static Connection connection;
@@ -452,15 +454,35 @@ public class Main {
 
         // connnect to to-do-app-list-database
 
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            String mysql_url = "jdbc:mysql://localhost:3306/to_do_list_app";
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
             String mysql_username = "root";
-            String mysql_password = "GMb123!";
-            connection = DriverManager.getConnection( mysql_url,mysql_username,mysql_password);
-        } catch (SQLException e) {
+            String mysql_password = "root";
+            String mysql_url = "jdbc:mysql://localhost:3306/?" + "user=" + mysql_username + "&password=" + mysql_password;
+            connection = DriverManager.getConnection( mysql_url);
+
+            // check if database exits
+
+            Statement st1 = connection.createStatement();
+            String query = "CREATE DATABASE IF NOT EXISTS to_do_list_app;";
+            st1.executeUpdate(query);
+            
+            // connect to database
+            Statement st2 = connection.createStatement();
+            query = "USE to_do_list_app;";
+            st2.executeUpdate(query);
+            
+            // check if table user_info exists else create one
+            Statement st3 = connection.createStatement();
+            query = "CREATE TABLE IF NOT EXISTS user_info( user_id varchar(20), user_password varchar(20), PRIMARY KEY (user_id));";
+            st3.executeUpdate(query);
+
+        } 
+        catch (SQLException e) 
+        {
             throw new RuntimeException(e);
-        }
+         }
         
 
         // set action for login and register button
