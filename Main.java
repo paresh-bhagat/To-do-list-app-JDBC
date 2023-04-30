@@ -35,7 +35,8 @@ public class Main {
 
         // set action for register button
 
-        register_panel.button_newregister.addActionListener( e -> { register_panel.text_takenu.setVisible(false); register_panel.text_registered.setVisible(false);
+        register_panel.button_newregister.addActionListener( e -> { register_panel.text_takenu.setVisible(false);
+            register_panel.text_registered.setVisible(false);
             try {
                 register(register_panel);
             } catch (SQLException | ClassNotFoundException ex) {
@@ -43,7 +44,8 @@ public class Main {
             }
         } );
 
-        register_panel.button_loginmenu.addActionListener( e -> { register_panel.setVisible(false); frame.panel1.setVisible(true); frame.panel2.setVisible(true);} );
+        register_panel.button_loginmenu.addActionListener( e -> { register_panel.setVisible(false);
+            frame.panel1.setVisible(true); frame.panel2.setVisible(true); frame.text_wup.setVisible(false);} );
     }
     // open a task for editing or deleting
     public static void add_edit_task(String usr_name, String task) throws SQLException {
@@ -53,7 +55,8 @@ public class Main {
 
         if ( task.equals("0") )
         {
-            panel_taskedit = new TaskEdit( "Enter task name","Enter task details" ,"00-00-0000","00-00","00-00-0000","00-00");
+            panel_taskedit = new TaskEdit( "Enter task name","Enter task details" ,
+                    "00-00-0000","00-00","00-00-0000","00-00");
             frame.add(panel_taskedit);
             panel_taskedit.text_tasksaved.setVisible(false);
             panel_taskedit.text_taskdeleted.setVisible(false);
@@ -91,7 +94,8 @@ public class Main {
             }
 
 
-            panel_taskedit = new TaskEdit( task,task_info.get(0) ,task_info.get(1),task_info.get(2),task_info.get(3),task_info.get(4));
+            panel_taskedit = new TaskEdit( task,task_info.get(0) ,task_info.get(1),task_info.get(2),
+                    task_info.get(3), task_info.get(4));
             frame.add(panel_taskedit);
             panel_taskedit.text_tasksaved.setVisible(false);
             panel_taskedit.text_taskdeleted.setVisible(false);
