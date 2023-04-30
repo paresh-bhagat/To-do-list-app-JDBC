@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+
+//panel where all task created are listed
 public class TaskView extends JPanel{
 
     TaskView()

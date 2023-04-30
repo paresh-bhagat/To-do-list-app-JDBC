@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+
+// starting page contains code for register, username , passwd.
 public class LoginFrame extends JFrame {
     JPanel panel1 = new JPanel();
     JPanel panel2 = new JPanel();

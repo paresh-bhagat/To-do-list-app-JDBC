@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+
+// panel where you edit your task ex. delete, edit etc.
+
 public class TaskEdit extends JPanel{
     JTextField textbox_taskname = new JTextField();
     JTextField textbox_taskdetails = new JTextField();

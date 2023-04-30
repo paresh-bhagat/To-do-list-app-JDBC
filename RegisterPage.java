@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+
+// panel where you register , new account
 public class RegisterPage extends JPanel{
     JButton button_newregister = new JButton();
     JButton button_loginmenu = new JButton();

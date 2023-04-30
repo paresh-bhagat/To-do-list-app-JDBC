@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+
+// left menu where options are present for back, change, password, add task.
+
 public class TaskPage extends JPanel{
     JButton button_loginmenu = new JButton();
     JButton button_addtask = new JButton();
