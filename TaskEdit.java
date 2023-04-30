@@ -39,11 +39,11 @@ public class TaskEdit extends JPanel{
         text_starttime.setText("Starting Time");
         text_starttime.setForeground(new Color(47, 43, 44));
         text_starttime.setFont(new Font("Futura",Font.ITALIC,16));
-        text_starttime.setBounds(400,210, 100,40);
+        text_starttime.setBounds(395,210, 150,40);
 
         // text box start time
 
-        textbox_starttime.setBounds(410,245,50, 20);
+        textbox_starttime.setBounds(395,245,100, 20);
         textbox_starttime.setBorder(null);
         textbox_starttime.setText(starttime);
         textbox_starttime.setHorizontalAlignment(JTextField.CENTER);
@@ -55,11 +55,11 @@ public class TaskEdit extends JPanel{
         text_endtime.setText("Ending time");
         text_endtime.setForeground(new Color(47, 43, 44));
         text_endtime.setFont(new Font("Futura",Font.ITALIC,16));
-        text_endtime.setBounds(695,210, 100,40);
+        text_endtime.setBounds(700,210, 100,40);
 
         // text box end time
 
-        textbox_endtime.setBounds(710,245,50, 20);
+        textbox_endtime.setBounds(700,245,100, 20);
         textbox_endtime.setBorder(null);
         textbox_endtime.setText(endtime);
         textbox_endtime.setHorizontalAlignment(JTextField.CENTER);
@@ -71,14 +71,14 @@ public class TaskEdit extends JPanel{
         text_startdate.setText("Starting Date");
         text_startdate.setForeground(new Color(47, 43, 44));
         text_startdate.setFont(new Font("Futura",Font.ITALIC,16));
-        text_startdate.setBounds(300,210, 100,40);
+        text_startdate.setBounds(250,210, 150,40);
 
         // text box start date
 
-        textbox_startdate.setBounds(310,245,80, 20);
+        textbox_startdate.setBounds(250,245,100, 20);
         textbox_startdate.setBorder(null);
         textbox_startdate.setText(startdate);
-        textbox_startdate.setHorizontalAlignment(JTextField.LEFT);
+        textbox_startdate.setHorizontalAlignment(JTextField.CENTER);
         textbox_startdate.setForeground(new Color(47, 43, 44));
         textbox_startdate.setFont(new Font("Futura",Font.PLAIN,14));
 
@@ -87,11 +87,11 @@ public class TaskEdit extends JPanel{
         text_enddate.setText("Ending date");
         text_enddate.setForeground(new Color(47, 43, 44));
         text_enddate.setFont(new Font("Futura",Font.ITALIC,16));
-        text_enddate.setBounds(600,210, 100,40);
+        text_enddate.setBounds(570,210, 100,40);
 
         // text box end date
 
-        textbox_enddate.setBounds(610,245,80, 20);
+        textbox_enddate.setBounds(570,245,100, 20);
         textbox_enddate.setBorder(null);
         textbox_enddate.setText(enddate);
         textbox_enddate.setHorizontalAlignment(JTextField.CENTER);
@@ -105,15 +105,15 @@ public class TaskEdit extends JPanel{
         textbox_taskname.setText(task);
         textbox_taskname.setHorizontalAlignment(JTextField.CENTER);
         textbox_taskname.setForeground(new Color(47, 43, 44));
-        textbox_taskname.setFont(new Font("Futura",Font.PLAIN,14));
+        textbox_taskname.setFont(new Font("Futura",Font.PLAIN,15));
 
         // text box task details
-        textbox_taskdetails.setBounds(380,350,300, 150);
+        textbox_taskdetails.setBounds(340,350,400, 80);
         textbox_taskdetails.setBorder(null);
         textbox_taskdetails.setText(details);
         textbox_taskdetails.setHorizontalAlignment(JTextField.CENTER);
         textbox_taskdetails.setForeground(new Color(47, 43, 44));
-        textbox_taskdetails.setFont(new Font("Futura",Font.PLAIN,14));
+        textbox_taskdetails.setFont(new Font("Futura",Font.PLAIN,15));
 
         // back button
         ImageIcon img_back = new ImageIcon( new ImageIcon("./images/backbutton.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
