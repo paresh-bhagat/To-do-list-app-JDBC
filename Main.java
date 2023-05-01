@@ -150,7 +150,7 @@ public class Main {
         panel_taskedit.button_backmenu.addActionListener( e -> { panel_taskedit.setVisible(false); task_page(usr_name);} );
     }
 
-    // go to task page from task edit pages
+    // go to task page if credentials are correct or come back to tasks page
     public static void task_page( String usr_name)
     {
         TaskPage task_panel = new TaskPage(usr_name);
@@ -166,8 +166,6 @@ public class Main {
 
             if( tasks.size()!=0 )
             {
-                task_panel.button_addtask.setText("Add new task");
-
                 // list all the task with buttons with user task table
 
                 for (String temp_s : tasks) {
@@ -188,10 +186,6 @@ public class Main {
                 }
 
             }
-            else
-            {
-                task_panel.button_addtask.setText("Create your first task");
-            }
 
             // button for delete user
 
@@ -205,10 +199,13 @@ public class Main {
 
                 frame.panel1.setVisible(true); frame.panel2.setVisible(true);});
 
-            // add action listener to add new task
+
 
             frame.add(task_panel);
             frame.add(taskview_panel);
+
+            // add action listener to add new task
+
             task_panel.button_addtask.addActionListener( e -> { task_panel.setVisible(false); taskview_panel.setVisible(false);
                 try {
                     add_edit_task(usr_name,"0");
@@ -239,8 +236,8 @@ public class Main {
         }
     }
 
-    // go to task page from login page
-    public static void task_page()
+    // check user credentials and if true open task page
+    public static void check_user()
     {
         frame.text_wup.setVisible(false);
 
@@ -263,83 +260,8 @@ public class Main {
                 {
                     frame.panel1.setVisible(false);
                     frame.panel2.setVisible(false);
-                    TaskPage task_panel = new TaskPage(usr_name);
-                    TaskView taskview_panel = new TaskView();
 
-                    // button to add new task
-
-                    task_panel.button_addtask.addActionListener( e -> { task_panel.setVisible(false); taskview_panel.setVisible(false);
-                        try {
-                            add_edit_task(usr_name,"0");
-                        } catch (SQLException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                    } );
-
-                    // get all tasks of a user
-                    List<String> tasks = database.get_all_task(usr_name);
-
-                    // check if user has any task added
-                    if(tasks.size()!=0)
-                    {
-                        task_panel.button_addtask.setText("Add new task");
-
-                        // list all the task with buttons with usertask table
-
-                        for (String temp_s : tasks) {
-
-                            // get all elements of List
-                            TaskButton button_t = new TaskButton(temp_s);
-                            button_t.addActionListener(e -> {
-                                task_panel.setVisible(false);
-                                taskview_panel.setVisible(false);
-                                try {
-                                    add_edit_task(usr_name, temp_s);
-                                } catch (Exception ex) {
-                                    throw new RuntimeException(ex);
-                                }
-                            });
-                            // Printing keys
-                            taskview_panel.add(button_t);
-                        }
-                    }
-                    else
-                    {
-                        task_panel.button_addtask.setText("Create your first task");
-                    }
-
-                    frame.add(task_panel);
-                    frame.add(taskview_panel);
-
-                    // add action listener for delete user button
-
-                    task_panel.button_delact.addActionListener(e -> { task_panel.setVisible(false); taskview_panel.setVisible(false);
-                        try {
-                            database.remove_user_userinfo(usr_name);
-                            database.drop_table_user(usr_name);
-                        } catch (SQLException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                        frame.panel1.setVisible(true); frame.panel2.setVisible(true);});
-
-                    // add action listener for change password button
-
-                    task_panel.button_changepswd.addActionListener( e -> { task_panel.setVisible(false); taskview_panel.setVisible(false);
-                        try {
-                            change_password(usr_name);
-                        } catch (SQLException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                    } );
-
-                    // add action listener for going back to main menu
-
-                    task_panel.button_loginmenu.addActionListener( e -> { task_panel.setVisible(false);
-                        taskview_panel.setVisible(false);
-                        frame.panel1.setVisible(true);
-                        frame.panel2.setVisible(true);} );
-
-
+                    task_page(usr_name);
                 }
                 else
                     frame.text_wup.setVisible(true);
@@ -394,7 +316,7 @@ public class Main {
 
         // set action for login and register button
 
-        frame.button_login.addActionListener( e -> task_page() );
+        frame.button_login.addActionListener( e -> check_user() );
         frame.button_register.addActionListener( e -> register_page() );
     }
 }

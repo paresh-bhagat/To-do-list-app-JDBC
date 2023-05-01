@@ -39,6 +39,7 @@ public class TaskPage extends JPanel{
         button_addtask.setBorder(null);
         button_addtask.setIconTextGap(4);
         button_addtask.setFocusable(false);
+        button_addtask.setText("Add new Task");
         button_addtask.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         button_addtask.setBackground(new Color(157, 168, 231));
         button_addtask.setIcon( img_addtask );

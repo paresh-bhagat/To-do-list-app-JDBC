@@ -217,9 +217,4 @@ public class DatabaseApi{
         return 0;
     }
 
-    public void close() throws SQLException {
-        System.out.println("object deleted");
-        this.connection.close();
-    }
-
 }
