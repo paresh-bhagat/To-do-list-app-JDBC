@@ -8,10 +8,8 @@ public class DatabaseApi{
 
     private final Connection connection;
 
-    DatabaseApi() throws SQLException, ClassNotFoundException {
+    DatabaseApi(String mysql_username,String mysql_password) throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        String mysql_username = "root";
-        String mysql_password = "root";
         String mysql_url = "jdbc:mysql://localhost:3306/?" + "user=" + mysql_username + "&password=" + mysql_password;
         this.connection = DriverManager.getConnection( mysql_url);
     }

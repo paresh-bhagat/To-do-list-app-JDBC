@@ -3,12 +3,11 @@ import java.util.List;
 
 public class Main {
     static LoginFrame frame = new LoginFrame();
-
+    static DatabaseApi database;
     // action for register button when clicked
     //
     public static void register( RegisterPage register_panel ) throws SQLException, ClassNotFoundException {
 
-        DatabaseApi database = new DatabaseApi();
         int result = database.check_userid(register_panel.textbox_newus.getText());
         // if username is already taken
 
@@ -54,8 +53,6 @@ public class Main {
     public static void add_task_button(String usr_name,String task,TaskEdit panel_taskedit){
 
         try {
-                DatabaseApi database = new DatabaseApi();
-
                 String new_task = panel_taskedit.textbox_taskname.getText();
 
                 if (database.check_task_exist(usr_name, new_task) == 0) {
@@ -108,7 +105,6 @@ public class Main {
 
             List<String> task_info;
             try{
-                DatabaseApi database = new DatabaseApi();
                 task_info = database.get_task_details(usr_name, task);
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
@@ -137,7 +133,6 @@ public class Main {
             panel_taskedit.button_deletetask.addActionListener( e -> {
 
                 try {
-                    DatabaseApi database = new DatabaseApi();
                     database.delete_task(usr_name, task);
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
@@ -159,7 +154,6 @@ public class Main {
         try {
 
             // get all tasks of a user
-            DatabaseApi database =new DatabaseApi();
             List<String> tasks = database.get_all_task(usr_name);
 
             // check if user has any task
@@ -244,7 +238,6 @@ public class Main {
         try {
             String usr_name =  frame.textbox_us.getText();
 
-            DatabaseApi database = new DatabaseApi();
             int result = database.check_userid(usr_name);
 
             // check if user is already present
@@ -261,6 +254,7 @@ public class Main {
                     frame.panel1.setVisible(false);
                     frame.panel2.setVisible(false);
 
+                    // open task page
                     task_page(usr_name);
                 }
                 else
@@ -293,7 +287,6 @@ public class Main {
                 e -> { String PasswordTyped = new String(change_panel.textbox_newpwd.getPassword());
 
                     try {
-                        DatabaseApi database = new DatabaseApi();
                         database.change_password(PasswordTyped,usr_name);
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
@@ -308,8 +301,9 @@ public class Main {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
 
         // connect to to-do-app-list-database
-
-        DatabaseApi database = new DatabaseApi();
+        String mysql_username = "root";
+        String mysql_password = "root";
+        database = new DatabaseApi(mysql_username,mysql_password);
         database.CreateDatabase();
         database.ConnectDatabase();
         database.CreateTable();
