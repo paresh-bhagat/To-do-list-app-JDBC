@@ -19,6 +19,7 @@ public class Main {
             // add new user
             String PasswordTyped = new String(register_panel.textbox_newpwd.getPassword());
             database.add_new_account(register_panel.textbox_newus.getText(),PasswordTyped);
+            register_panel.button_newregister.setVisible(false);
             register_panel.text_registered.setVisible(true);
         }
     }

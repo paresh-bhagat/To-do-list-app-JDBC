@@ -47,7 +47,7 @@ public class RegisterPage extends JPanel{
 
         // register button
         ImageIcon img_register = new ImageIcon( new ImageIcon("./images/register.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-        button_newregister.setBounds(540, 360, 40,40);
+        button_newregister.setBounds(500, 360, 40,40);
         button_newregister.setBorder(null);
         button_newregister.setFocusable(false);
         button_newregister.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -56,23 +56,25 @@ public class RegisterPage extends JPanel{
 
         //  username already taken
 
-        text_takenu.setText("Username already taken");
+        text_takenu.setText("Username already taken (・・?");
+        text_takenu.setHorizontalAlignment(JLabel.CENTER);
         text_takenu.setForeground(new Color(232, 29, 64));
-        text_takenu.setFont(new Font("Futura",Font.ITALIC,15));
-        text_takenu.setBounds(450,420, 400,40);
+        text_takenu.setFont(new Font("Futura",Font.PLAIN,15));
+        text_takenu.setBounds(340,420, 400,40);
         text_takenu.setVisible(false);
 
         // registered
 
-        text_registered.setText("Succesfully Registered");
+        text_registered.setText("Successfully Registered (*_*)");
         text_registered.setForeground(new Color(106, 210, 38));
-        text_registered.setFont(new Font("Futura",Font.ITALIC,15));
-        text_registered.setBounds(450,420, 400,40);
+        text_registered.setHorizontalAlignment(JLabel.CENTER);
+        text_registered.setFont(new Font("Futura",Font.PLAIN,15));
+        text_registered.setBounds(340,360, 400,40);
         text_registered.setVisible(false);
 
         // main menu
         ImageIcon img_mainmenu = new ImageIcon( new ImageIcon("./images/backbutton.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-        button_loginmenu.setBounds(460, 360, 40,40);
+        button_loginmenu.setBounds(100, 80, 40,40);
         button_loginmenu.setBorder(null);
         button_loginmenu.setFocusable(false);
         button_loginmenu.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
