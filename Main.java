@@ -5,6 +5,7 @@ public class Main {
     static LoginFrame frame = new LoginFrame();
 
     // action for register button when clicked
+    //
     public static void register( RegisterPage register_panel ) throws SQLException, ClassNotFoundException {
 
         DatabaseApi database = new DatabaseApi();
