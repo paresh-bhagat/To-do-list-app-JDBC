@@ -16,6 +16,8 @@ public class TaskEdit extends JPanel{
     JButton button_deletetask = new JButton();
 
     JLabel text_tasksaved = new JLabel();
+
+    JLabel text_task_already_exist = new JLabel();
     JLabel text_taskdeleted = new JLabel();
     TaskEdit(String task, String details, String startdate, String starttime, String enddate, String endtime)
     {
@@ -118,6 +120,7 @@ public class TaskEdit extends JPanel{
         // back button
         ImageIcon img_back = new ImageIcon( new ImageIcon("./images/backbutton.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         button_backmenu.setBorder(null);
+        button_backmenu.setBounds(100, 80, 40,40);
         button_backmenu.setFocusable(false);
         button_backmenu.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         button_backmenu.setBackground(new Color(157, 168, 231));
@@ -134,7 +137,7 @@ public class TaskEdit extends JPanel{
 
         // delete button
         ImageIcon img_delete = new ImageIcon( new ImageIcon("./images/remove.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-        button_deletetask.setBounds(560, 530, 40,40);
+        button_deletetask.setBounds(550, 530, 40,40);
         button_deletetask.setBorder(null);
         button_deletetask.setFocusable(false);
         button_deletetask.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -142,24 +145,29 @@ public class TaskEdit extends JPanel{
         button_deletetask.setIcon(img_delete);
 
         if (task.equals("Enter task name")) {
-            button_backmenu.setBounds(480, 530, 40,40);
-            button_save.setBounds(530, 530, 40,40);
+            button_save.setBounds(505, 530, 40,40);
         }
         else {
-            button_backmenu.setBounds(460, 530, 40,40);
-            button_save.setBounds(510, 530, 40,40);
+            button_save.setBounds(475, 530, 40,40);
         }
         // text tasksaved
-        text_tasksaved.setText("task saved");
-        text_tasksaved.setForeground(new Color(121, 206, 51));
-        text_tasksaved.setFont(new Font("Futura",Font.ITALIC,15));
-        text_tasksaved.setBounds(500,650, 100,40);
+        text_tasksaved.setText("task saved (*_*)");
+        text_tasksaved.setForeground(new Color(17, 14, 14));
+        text_tasksaved.setFont(new Font("Futura",Font.PLAIN,15));
+        text_tasksaved.setBounds(480,460, 200,40);
+
+        // text task already exist
+        text_task_already_exist.setText("task already exist (・・?");
+        text_task_already_exist.setForeground(new Color(185, 29, 29));
+        text_task_already_exist.setFont(new Font("Futura",Font.PLAIN,15));
+        text_task_already_exist.setBounds(460,460, 200,40);
+
 
         // text taskdeleted
-        text_taskdeleted.setText("task deleted");
-        text_taskdeleted.setForeground(new Color(121, 206, 51));
-        text_taskdeleted.setFont(new Font("Futura",Font.ITALIC,15));
-        text_taskdeleted.setBounds(500,650, 100,20);
+        text_taskdeleted.setText("task deleted (*_*;");
+        text_taskdeleted.setForeground(new Color(17, 14, 14));
+        text_taskdeleted.setFont(new Font("Futura",Font.PLAIN,15));
+        text_taskdeleted.setBounds(480,460, 150,40);
 
         this.setBackground(new Color(157, 168, 231));
         this.setBounds(0,0,1080,720);
@@ -175,6 +183,7 @@ public class TaskEdit extends JPanel{
         this.add(button_deletetask);
         this.add(text_tasksaved);
         this.add(text_taskdeleted);
+        this.add(text_task_already_exist);
         this.add(text_startdate);
         this.add(text_enddate);
         this.add(textbox_startdate);

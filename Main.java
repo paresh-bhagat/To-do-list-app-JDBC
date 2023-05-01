@@ -48,44 +48,63 @@ public class Main {
         register_panel.button_loginmenu.addActionListener( e -> { register_panel.setVisible(false);
             frame.panel1.setVisible(true); frame.panel2.setVisible(true); frame.text_wup.setVisible(false);} );
     }
+
+    // action for add task for button click
+    public static void add_task_button(String usr_name,String task,TaskEdit panel_taskedit){
+
+        try {
+                DatabaseApi database = new DatabaseApi();
+
+                String new_task = panel_taskedit.textbox_taskname.getText();
+
+                if (database.check_task_exist(usr_name, new_task) == 0) {
+
+                    if(task.equals("0")){
+                        database.add_task(usr_name, panel_taskedit.textbox_taskname.getText(),
+                                panel_taskedit.textbox_taskdetails.getText(),
+                                panel_taskedit.textbox_startdate.getText(),
+                                panel_taskedit.textbox_starttime.getText(),
+                                panel_taskedit.textbox_enddate.getText(),
+                                panel_taskedit.textbox_endtime.getText());
+
+                    }
+                    else {
+                        database.update_task(usr_name,panel_taskedit.textbox_taskname.getText(),
+                                panel_taskedit.textbox_taskdetails.getText(),
+                                panel_taskedit.textbox_startdate.getText(),
+                                panel_taskedit.textbox_starttime.getText(),
+                                panel_taskedit.textbox_enddate.getText(),
+                                panel_taskedit.textbox_endtime.getText(),
+                                task);
+                    }
+                    panel_taskedit.text_tasksaved.setVisible(true);
+                }
+                else {
+                    panel_taskedit.text_task_already_exist.setVisible(true);
+                }
+
+
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+
+        panel_taskedit.button_deletetask.setVisible(false);
+        panel_taskedit.button_save.setVisible(false);
+
+    }
+
     // open a task for editing or deleting
     public static void add_edit_task(String usr_name, String task) throws SQLException {
         TaskEdit panel_taskedit;
 
-        // if creating a new task
-
-        if ( task.equals("0") )
+        if (task.equals("0"))
         {
             panel_taskedit = new TaskEdit( "Enter task name","Enter task details" ,
                     "00-00-0000","00-00","00-00-0000","00-00");
-            frame.add(panel_taskedit);
-            panel_taskedit.text_tasksaved.setVisible(false);
-            panel_taskedit.text_taskdeleted.setVisible(false);
-            panel_taskedit.button_deletetask.setVisible(false);
 
-            panel_taskedit.button_save.addActionListener( e -> { panel_taskedit.text_tasksaved.setVisible(true);
-
-                try {
-
-                    DatabaseApi database = new DatabaseApi();
-                    database.add_task(usr_name,panel_taskedit.textbox_taskname.getText(),
-                            panel_taskedit.textbox_taskdetails.getText(),
-                            panel_taskedit.textbox_startdate.getText(),
-                            panel_taskedit.textbox_starttime.getText(),
-                            panel_taskedit.textbox_enddate.getText(),
-                            panel_taskedit.textbox_endtime.getText());
-
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
-                }
-
-                panel_taskedit.setVisible(false); task_page(usr_name);} );
         }
+        else {
 
-        // if task is already present
-
-        else
-        {
             List<String> task_info;
             try{
                 DatabaseApi database = new DatabaseApi();
@@ -97,32 +116,24 @@ public class Main {
 
             panel_taskedit = new TaskEdit( task,task_info.get(0) ,task_info.get(1),task_info.get(2),
                     task_info.get(3), task_info.get(4));
-            frame.add(panel_taskedit);
-            panel_taskedit.text_tasksaved.setVisible(false);
-            panel_taskedit.text_taskdeleted.setVisible(false);
+        }
+        frame.add(panel_taskedit);
+
+        panel_taskedit.text_tasksaved.setVisible(false);
+        panel_taskedit.text_taskdeleted.setVisible(false);
+        panel_taskedit.text_task_already_exist.setVisible(false);
+        panel_taskedit.button_deletetask.setVisible(false);
+
+        // add buttons
+
+        panel_taskedit.button_save.addActionListener(e -> add_task_button(usr_name,task,panel_taskedit));
+
+        if (!task.equals("0"))
+        {
+            // button to delete this task
             panel_taskedit.button_deletetask.setVisible(true);
 
-
-            panel_taskedit.button_save.addActionListener(e -> { panel_taskedit.text_tasksaved.setVisible(true);
-                try {
-                    DatabaseApi database = new DatabaseApi();
-                    database.update_task(usr_name,panel_taskedit.textbox_taskname.getText(),
-                                panel_taskedit.textbox_taskdetails.getText(),
-                                panel_taskedit.textbox_startdate.getText(),
-                                panel_taskedit.textbox_starttime.getText(),
-                                panel_taskedit.textbox_enddate.getText(),
-                                panel_taskedit.textbox_endtime.getText(),
-                                task);
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
-                }
-
-                panel_taskedit.setVisible(false);
-                task_page(usr_name);} );
-
-            // button to delete this task
-
-            panel_taskedit.button_deletetask.addActionListener( e -> { panel_taskedit.text_taskdeleted.setVisible(true);
+            panel_taskedit.button_deletetask.addActionListener( e -> {
 
                 try {
                     DatabaseApi database = new DatabaseApi();
@@ -130,9 +141,9 @@ public class Main {
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
-
-                panel_taskedit.setVisible(false);
-                task_page(usr_name);} );
+                panel_taskedit.text_taskdeleted.setVisible(true);
+                panel_taskedit.button_deletetask.setVisible(false);
+                panel_taskedit.button_save.setVisible(false);} );
         }
 
         panel_taskedit.button_backmenu.addActionListener( e -> { panel_taskedit.setVisible(false); task_page(usr_name);} );

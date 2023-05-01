@@ -203,6 +203,19 @@ public class DatabaseApi{
         st.setString(1,task);
         st.executeUpdate();
     }
+    // check if task exist
+    public int check_task_exist(String usr_name,String task) throws SQLException {
+        PreparedStatement st;
+        ResultSet rset;
+        String query = "SELECT * FROM to_do_list_app." + usr_name + "_task" + " WHERE task=?;";
+        st = connection.prepareStatement(query);
+        st.setString(1,task);
+        rset = st.executeQuery();
+
+        if(rset.next())
+            return 1;
+        return 0;
+    }
 
     public void close() throws SQLException {
         System.out.println("object deleted");
