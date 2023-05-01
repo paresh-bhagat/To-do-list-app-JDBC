@@ -55,32 +55,29 @@ public class Main {
         try {
                 String new_task = panel_taskedit.textbox_taskname.getText();
 
-                if (database.check_task_exist(usr_name, new_task) == 0) {
+                if( task.equals("0") && database.check_task_exist(usr_name, new_task) == 0 ){
+                            database.add_task(usr_name, panel_taskedit.textbox_taskname.getText(),
+                                    panel_taskedit.textbox_taskdetails.getText(),
+                                    panel_taskedit.textbox_startdate.getText(),
+                                    panel_taskedit.textbox_starttime.getText(),
+                                    panel_taskedit.textbox_enddate.getText(),
+                                    panel_taskedit.textbox_endtime.getText());
+                    panel_taskedit.text_tasksaved.setVisible(true);
 
-                    if(task.equals("0")){
-                        database.add_task(usr_name, panel_taskedit.textbox_taskname.getText(),
-                                panel_taskedit.textbox_taskdetails.getText(),
-                                panel_taskedit.textbox_startdate.getText(),
-                                panel_taskedit.textbox_starttime.getText(),
-                                panel_taskedit.textbox_enddate.getText(),
-                                panel_taskedit.textbox_endtime.getText());
-
-                    }
-                    else {
-                        database.update_task(usr_name,panel_taskedit.textbox_taskname.getText(),
-                                panel_taskedit.textbox_taskdetails.getText(),
-                                panel_taskedit.textbox_startdate.getText(),
-                                panel_taskedit.textbox_starttime.getText(),
-                                panel_taskedit.textbox_enddate.getText(),
-                                panel_taskedit.textbox_endtime.getText(),
-                                task);
-                    }
+                }
+                else if ( task.equals(new_task) || database.check_task_exist(usr_name, new_task) == 0) {
+                    database.update_task(usr_name,panel_taskedit.textbox_taskname.getText(),
+                            panel_taskedit.textbox_taskdetails.getText(),
+                            panel_taskedit.textbox_startdate.getText(),
+                            panel_taskedit.textbox_starttime.getText(),
+                            panel_taskedit.textbox_enddate.getText(),
+                            panel_taskedit.textbox_endtime.getText(),
+                            task);
                     panel_taskedit.text_tasksaved.setVisible(true);
                 }
                 else {
                     panel_taskedit.text_task_already_exist.setVisible(true);
                 }
-
 
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
