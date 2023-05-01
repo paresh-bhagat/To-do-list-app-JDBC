@@ -376,6 +376,7 @@ public class Main {
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
+                    change_panel.button_changepassword.setVisible(false);
                     change_panel.text_changed.setVisible(true);}
         );
 

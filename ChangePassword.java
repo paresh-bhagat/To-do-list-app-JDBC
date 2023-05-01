@@ -13,17 +13,18 @@ public class ChangePassword extends JPanel {
         // text new password
         JLabel text_newpwd = new JLabel();
         text_newpwd.setText("Enter new Password");
-        text_newpwd.setBounds(410,150,300,80);
+        text_newpwd.setHorizontalAlignment(JLabel.CENTER);
+        text_newpwd.setBounds(390,150,300,80);
         text_newpwd.setForeground(new Color(47, 43, 44));
         text_newpwd.setFont(new Font("Futura",Font.PLAIN,25));
 
         // text-box password
         textbox_newpwd.setBorder(null);
-        textbox_newpwd.setBounds(400,230,250,25);
+        textbox_newpwd.setBounds(415,230,250,25);
 
         // change password button
         ImageIcon img_ok = new ImageIcon( new ImageIcon("./images/check.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-        button_changepassword.setBounds(520, 280, 40,40);
+        button_changepassword.setBounds(510, 280, 40,40);
         button_changepassword.setBorder(null);
         button_changepassword.setFocusable(false);
         button_changepassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -32,15 +33,16 @@ public class ChangePassword extends JPanel {
 
         // registered
 
-        text_changed.setText("Password Succesfully Changed");
-        text_changed.setBounds(410,320,230,40);
+        text_changed.setText("Password Successfully Changed (*_*)");
+        text_changed.setHorizontalAlignment(JLabel.CENTER);
+        text_changed.setBounds(340,280,400,40);
         text_changed.setForeground(new Color(106, 210, 38));
-        text_changed.setFont(new Font("Futura",Font.ITALIC,15));
+        text_changed.setFont(new Font("Futura",Font.PLAIN,15));
         text_changed.setVisible(false);
 
         // back menu
         ImageIcon img_back = new ImageIcon( new ImageIcon("./images/backbutton.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-        button_back.setBounds(470, 280, 40,40);
+        button_back.setBounds(100, 80, 40,40);
         button_back.setBorder(null);
         button_back.setFocusable(false);
         button_back.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

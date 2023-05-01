@@ -14,7 +14,7 @@ public class TaskPage extends JPanel{
 
         /* Welcome user */
         ImageIcon img_user = new ImageIcon( new ImageIcon("./images/user.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
-        text_wlcusr.setText("Welcome " + usr_name);
+        text_wlcusr.setText(usr_name);
         text_wlcusr.setForeground(new Color(47, 43, 44));
         text_wlcusr.setFont(new Font("Futura",Font.ITALIC,15));
         text_wlcusr.setIcon(img_user);
