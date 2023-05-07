@@ -2,7 +2,7 @@
 
 A To-Do List app using java. User can create account, login, add tasks, change or delete tasks, change password and delete account. It connects to app database (MySQL) with JDBC (Java Database Connectivity) through the Java code. JDBC is one of the standard APIs for database connectivity, using it we can easily run our query, statement, and also fetch data from the database. I have used Swing (GUI widget toolkit for Java) for this app.
 
-## Requirement
+## Requirements
 * JDK
 * MySQL
 * MySQL Connector to the Java (JAR file), the ‘JAR’ file must be in classpath while compiling and running the code of JDBC
@@ -12,7 +12,7 @@ A To-Do List app using java. User can create account, login, add tasks, change o
 
 ## How to run
 
-# Ubuntu
+### Ubuntu
 
 ```
 * Install mysql-server : sudo apt-get install mysql-server
@@ -31,7 +31,6 @@ A To-Do List app using java. User can create account, login, add tasks, change o
 * Create user_info table : CREATE TABLE user_info( user_id varchar(20), user_password varchar(20), PRIMARY KEY (user_id));
 * Now that table is created, you can fill some values which you want initially using mySQL commands.Same can also be done by using GUI.
 ```
-
 If you are using IDE, add jar file to your project (included in lib directory).
 
 ## Images
