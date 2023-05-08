@@ -1,4 +1,4 @@
-# TaskBox a To-do list app in Java with MySQL
+# To-do list app in Java with JDBC
 
 A To-Do List app using java. User can create account, login, add tasks, change or delete tasks, change password and delete account. It connects to app database (MySQL) with JDBC (Java Database Connectivity) through the Java code. JDBC is one of the standard APIs for database connectivity, using it we can easily run our query, statement, and also fetch data from the database. I have used Swing (GUI widget toolkit for Java) for this app.
 
