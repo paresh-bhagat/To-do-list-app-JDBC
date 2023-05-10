@@ -1,19 +1,26 @@
+package todolistappjdbc;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
 
 // left menu where options are present for back, change, password, add task.
 
+@SuppressWarnings("serial")
 public class TaskPage extends JPanel{
     JButton button_loginmenu = new JButton();
     JButton button_addtask = new JButton();
     JLabel text_wlcusr = new JLabel();
     JButton button_changepswd = new JButton();
     JButton button_delact = new JButton();
-    TaskPage(String usr_name)
+    TaskPage(String usr_name) throws IOException
     {
 
         /* Welcome user */
-        ImageIcon img_user = new ImageIcon( new ImageIcon("./images/user.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+    	InputStream stream = this.getClass().getClassLoader().getResourceAsStream("user.png");
+        ImageIcon img_user = new ImageIcon( new ImageIcon(ImageIO.read(stream)).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
         text_wlcusr.setText(usr_name);
         text_wlcusr.setForeground(new Color(47, 43, 44));
         text_wlcusr.setFont(new Font("Futura",Font.ITALIC,15));
@@ -23,7 +30,8 @@ public class TaskPage extends JPanel{
         text_wlcusr.setVerticalTextPosition(JButton.BOTTOM);
 
         // main menu
-        ImageIcon img_mainmenu = new ImageIcon( new ImageIcon("./images/home.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        stream = this.getClass().getClassLoader().getResourceAsStream("home.png");
+        ImageIcon img_mainmenu = new ImageIcon( new ImageIcon(ImageIO.read(stream)).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         button_loginmenu.setBorder(null);
         button_loginmenu.setText("Login Page");
         button_loginmenu.setFocusable(false);
@@ -35,7 +43,8 @@ public class TaskPage extends JPanel{
         button_loginmenu.setVerticalTextPosition(JButton.BOTTOM);
 
         // add task
-        ImageIcon img_addtask = new ImageIcon( new ImageIcon("./images/addtask1.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        stream = this.getClass().getClassLoader().getResourceAsStream("addtask1.png");
+        ImageIcon img_addtask = new ImageIcon( new ImageIcon(ImageIO.read(stream)).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         button_addtask.setBorder(null);
         button_addtask.setIconTextGap(4);
         button_addtask.setFocusable(false);
@@ -47,7 +56,8 @@ public class TaskPage extends JPanel{
         button_addtask.setVerticalTextPosition(JButton.BOTTOM);
 
         // change password
-        ImageIcon img_change_pswd = new ImageIcon( new ImageIcon("./images/reset-password.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        stream = this.getClass().getClassLoader().getResourceAsStream("reset-password.png");
+        ImageIcon img_change_pswd = new ImageIcon( new ImageIcon(ImageIO.read(stream)).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         button_changepswd.setBorder(null);
         button_changepswd.setIconTextGap(4);
         button_changepswd.setText("Change password");
@@ -59,7 +69,8 @@ public class TaskPage extends JPanel{
         button_changepswd.setVerticalTextPosition(JButton.BOTTOM);
 
         // delete account
-        ImageIcon img_delac = new ImageIcon( new ImageIcon("./images/delete-user.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        stream = this.getClass().getClassLoader().getResourceAsStream("delete-user.png");
+        ImageIcon img_delac = new ImageIcon( new ImageIcon(ImageIO.read(stream)).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         button_delact.setBorder(null);
         button_delact.setIconTextGap(4);
         button_delact.setText("Delete account");

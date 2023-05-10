@@ -1,7 +1,13 @@
+package todolistappjdbc;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
 
 // starting page contains code for register, username , passwd.
+@SuppressWarnings("serial")
 public class LoginFrame extends JFrame {
     JPanel panel1 = new JPanel();
     JPanel panel2 = new JPanel();
@@ -10,7 +16,7 @@ public class LoginFrame extends JFrame {
     JTextField textbox_us = new JTextField();
     JPasswordField textbox_pwd = new JPasswordField();
     JLabel text_wup = new JLabel();
-    LoginFrame(){
+    LoginFrame() throws IOException{
         // text welcome
         JLabel text_label1 = new JLabel();
         text_label1.setText("Welcome to TaskBox");
@@ -26,7 +32,8 @@ public class LoginFrame extends JFrame {
         text_label2.setBounds(100,160, 400,50);
 
         // image
-        ImageIcon img1 = new ImageIcon( new ImageIcon("./images/multitask.png").getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH));
+        InputStream stream = this.getClass().getClassLoader().getResourceAsStream("multitask.png");
+        ImageIcon img1 = new ImageIcon( new ImageIcon(ImageIO.read(stream)).getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH));
         JLabel image_label1 = new JLabel();
         image_label1.setIcon(img1);
         image_label1.setBounds(80,210, 400,400);
@@ -74,7 +81,8 @@ public class LoginFrame extends JFrame {
         textbox_pwd.setBorder(null);
 
         // login button
-        ImageIcon img_login = new ImageIcon( new ImageIcon("./images/login.png").getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH));
+        stream = this.getClass().getClassLoader().getResourceAsStream("login.png");
+        ImageIcon img_login = new ImageIcon( new ImageIcon(ImageIO.read(stream)).getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH));
         button_login.setBounds(180, 320, 70,70);
         button_login.setBorder(null);
         button_login.setFocusable(false);
@@ -91,7 +99,8 @@ public class LoginFrame extends JFrame {
         text_nus.setBounds(180,450, 100,40);
 
         // register button
-        ImageIcon img_register = new ImageIcon( new ImageIcon("./images/register.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        stream = this.getClass().getClassLoader().getResourceAsStream("register.png");
+        ImageIcon img_register = new ImageIcon( new ImageIcon(ImageIO.read(stream)).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         button_register.setBounds(195, 490, 40,40);
         button_register.setBorder(null);
         button_register.setFocusable(false);
@@ -127,7 +136,8 @@ public class LoginFrame extends JFrame {
         this.setTitle("TO-DO-List");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-        ImageIcon icon_app = new ImageIcon("./images/task.png");
+        stream = this.getClass().getClassLoader().getResourceAsStream("task.png");
+        ImageIcon icon_app = new ImageIcon(ImageIO.read(stream));
         this.setIconImage(icon_app.getImage());
         this.setSize(1080,720);
         this.setLayout(null);

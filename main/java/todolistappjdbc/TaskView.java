@@ -1,7 +1,10 @@
+package todolistappjdbc;
+
 import javax.swing.*;
 import java.awt.*;
 
 //panel where all task created are listed
+@SuppressWarnings("serial")
 public class TaskView extends JPanel{
 
     TaskView()

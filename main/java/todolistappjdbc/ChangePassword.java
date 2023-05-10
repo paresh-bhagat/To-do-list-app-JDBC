@@ -1,5 +1,11 @@
+package todolistappjdbc;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
+@SuppressWarnings("serial")
 public class ChangePassword extends JPanel {
 
     JButton button_changepassword = new JButton();
@@ -8,7 +14,7 @@ public class ChangePassword extends JPanel {
 
     JLabel text_changed = new JLabel();
 
-    ChangePassword(){
+    ChangePassword() throws IOException{
 
         // text new password
         JLabel text_newpwd = new JLabel();
@@ -23,7 +29,8 @@ public class ChangePassword extends JPanel {
         textbox_newpwd.setBounds(415,230,250,25);
 
         // change password button
-        ImageIcon img_ok = new ImageIcon( new ImageIcon("./images/check.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        InputStream stream = this.getClass().getClassLoader().getResourceAsStream("check.png"); 
+        ImageIcon img_ok = new ImageIcon( new ImageIcon(ImageIO.read(stream)).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         button_changepassword.setBounds(510, 280, 40,40);
         button_changepassword.setBorder(null);
         button_changepassword.setFocusable(false);
@@ -41,7 +48,8 @@ public class ChangePassword extends JPanel {
         text_changed.setVisible(false);
 
         // back menu
-        ImageIcon img_back = new ImageIcon( new ImageIcon("./images/backbutton.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        stream = this.getClass().getClassLoader().getResourceAsStream("backbutton.png");
+        ImageIcon img_back = new ImageIcon( new ImageIcon(ImageIO.read(stream)).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         button_back.setBounds(100, 80, 40,40);
         button_back.setBorder(null);
         button_back.setFocusable(false);

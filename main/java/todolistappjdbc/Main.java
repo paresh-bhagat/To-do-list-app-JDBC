@@ -1,9 +1,14 @@
+package todolistappjdbc;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class Main {
-    static LoginFrame frame = new LoginFrame();
+    static LoginFrame frame;
     static DatabaseApi database;
+    
     // action for register button when clicked
     //
     public static void register( RegisterPage register_panel ) throws SQLException, ClassNotFoundException {
@@ -24,7 +29,7 @@ public class Main {
     }
 
     // register user page
-    public static void register_page()
+    public static void register_page() throws IOException
     {
         // remove login panel and put register page panel
 
@@ -89,13 +94,20 @@ public class Main {
     }
 
     // open a task for editing or deleting
-    public static void add_edit_task(String usr_name, String task) throws SQLException {
+    public static void add_edit_task(String usr_name, String task) throws SQLException, IOException {
         TaskEdit panel_taskedit;
 
         if (task.equals("0"))
         {
+        	Date date = new Date();
+        	SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm");
+    		SimpleDateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy");
+    		
+    		String current_date = formatDate.format(date);
+    		String current_time = formatTime.format(date);
+    		
             panel_taskedit = new TaskEdit( "Enter task name","Enter task details" ,
-                    "00-00-0000","00-00","00-00-0000","00-00");
+                    current_date,current_time,current_date,current_time);
 
         }
         else {
@@ -139,11 +151,16 @@ public class Main {
                 panel_taskedit.button_save.setVisible(false);} );
         }
 
-        panel_taskedit.button_backmenu.addActionListener( e -> { panel_taskedit.setVisible(false); task_page(usr_name);} );
+        panel_taskedit.button_backmenu.addActionListener( e -> { panel_taskedit.setVisible(false); try {
+			task_page(usr_name);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}} );
     }
 
     // go to task page if credentials are correct or come back to tasks page
-    public static void task_page( String usr_name)
+    public static void task_page( String usr_name) throws IOException
     {
         TaskPage task_panel = new TaskPage(usr_name);
         TaskView taskview_panel = new TaskView();
@@ -200,7 +217,7 @@ public class Main {
             task_panel.button_addtask.addActionListener( e -> { task_panel.setVisible(false); taskview_panel.setVisible(false);
                 try {
                     add_edit_task(usr_name,"0");
-                } catch (SQLException ex) {
+                } catch (SQLException | IOException ex) {
                     throw new RuntimeException(ex);
                 }
             } );
@@ -210,7 +227,7 @@ public class Main {
             task_panel.button_changepswd.addActionListener( e -> { task_panel.setVisible(false); taskview_panel.setVisible(false);
                 try {
                     change_password(usr_name);
-                } catch (SQLException ex) {
+                } catch (SQLException | IOException ex) {
                     throw new RuntimeException(ex);
                 }
             } );
@@ -270,7 +287,7 @@ public class Main {
         }
     }
     // function to change password of user
-    public static void change_password(String usr_name) throws SQLException {
+    public static void change_password(String usr_name) throws SQLException, IOException {
 
         // create panel for change_password
 
@@ -293,10 +310,17 @@ public class Main {
         );
 
         // go back to task_page
-        change_panel.button_back.addActionListener( e -> { change_panel.setVisible(false); task_page(usr_name);} );
+        change_panel.button_back.addActionListener( e -> { change_panel.setVisible(false); try {
+			task_page(usr_name);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}} );
     }
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-
+    public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
+    	
+    	frame = new LoginFrame();
+    	
         // connect to to-do-app-list-database
         String mysql_username = "root";
         String mysql_password = "root";
@@ -308,6 +332,13 @@ public class Main {
         // set action for login and register button
 
         frame.button_login.addActionListener( e -> check_user() );
-        frame.button_register.addActionListener( e -> register_page() );
+        frame.button_register.addActionListener( e -> {
+			try {
+				register_page();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} );
     }
 }

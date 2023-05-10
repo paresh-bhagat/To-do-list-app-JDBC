@@ -1,7 +1,13 @@
+package todolistappjdbc;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
 
 // panel where you register , new account
+@SuppressWarnings("serial")
 public class RegisterPage extends JPanel{
     JButton button_newregister = new JButton();
     JButton button_loginmenu = new JButton();
@@ -9,7 +15,7 @@ public class RegisterPage extends JPanel{
     JPasswordField textbox_newpwd = new JPasswordField();
     JLabel text_takenu = new JLabel();
     JLabel text_registered = new JLabel();
-    RegisterPage()
+    RegisterPage() throws IOException
     {
 
         // Create account
@@ -46,7 +52,8 @@ public class RegisterPage extends JPanel{
         textbox_newpwd.setBorder(null);
 
         // register button
-        ImageIcon img_register = new ImageIcon( new ImageIcon("./images/register.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        InputStream stream = this.getClass().getClassLoader().getResourceAsStream("register.png");
+        ImageIcon img_register = new ImageIcon( new ImageIcon(ImageIO.read(stream)).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         button_newregister.setBounds(500, 360, 40,40);
         button_newregister.setBorder(null);
         button_newregister.setFocusable(false);
@@ -73,7 +80,8 @@ public class RegisterPage extends JPanel{
         text_registered.setVisible(false);
 
         // main menu
-        ImageIcon img_mainmenu = new ImageIcon( new ImageIcon("./images/backbutton.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        stream = this.getClass().getClassLoader().getResourceAsStream("backbutton.png");
+        ImageIcon img_mainmenu = new ImageIcon( new ImageIcon(ImageIO.read(stream)).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         button_loginmenu.setBounds(100, 80, 40,40);
         button_loginmenu.setBorder(null);
         button_loginmenu.setFocusable(false);

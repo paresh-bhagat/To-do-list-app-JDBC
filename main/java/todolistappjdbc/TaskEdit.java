@@ -1,8 +1,14 @@
+package todolistappjdbc;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
 
 // panel where you edit your task ex. delete, edit etc.
 
+@SuppressWarnings("serial")
 public class TaskEdit extends JPanel{
     JTextField textbox_taskname = new JTextField();
     JTextField textbox_taskdetails = new JTextField();
@@ -19,7 +25,7 @@ public class TaskEdit extends JPanel{
 
     JLabel text_task_already_exist = new JLabel();
     JLabel text_taskdeleted = new JLabel();
-    TaskEdit(String task, String details, String startdate, String starttime, String enddate, String endtime)
+    TaskEdit(String task, String details, String startdate, String starttime, String enddate, String endtime) throws IOException
     {
 
         // text task
@@ -118,7 +124,8 @@ public class TaskEdit extends JPanel{
         textbox_taskdetails.setFont(new Font("Futura",Font.PLAIN,15));
 
         // back button
-        ImageIcon img_back = new ImageIcon( new ImageIcon("./images/backbutton.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        InputStream stream = this.getClass().getClassLoader().getResourceAsStream("backbutton.png"); 
+        ImageIcon img_back = new ImageIcon( new ImageIcon(ImageIO.read(stream)).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         button_backmenu.setBorder(null);
         button_backmenu.setBounds(100, 80, 40,40);
         button_backmenu.setFocusable(false);
@@ -127,8 +134,8 @@ public class TaskEdit extends JPanel{
         button_backmenu.setIcon(img_back);
 
         // save button
-        ImageIcon img_save = new ImageIcon( new ImageIcon("./images/save.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-
+        stream = this.getClass().getClassLoader().getResourceAsStream("save.png");  
+        ImageIcon img_save = new ImageIcon( new ImageIcon(ImageIO.read(stream)).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         button_save.setBorder(null);
         button_save.setFocusable(false);
         button_save.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -136,7 +143,8 @@ public class TaskEdit extends JPanel{
         button_save.setIcon(img_save);
 
         // delete button
-        ImageIcon img_delete = new ImageIcon( new ImageIcon("./images/remove.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        stream = this.getClass().getClassLoader().getResourceAsStream("remove.png"); 
+        ImageIcon img_delete = new ImageIcon( new ImageIcon(ImageIO.read(stream)).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         button_deletetask.setBounds(550, 530, 40,40);
         button_deletetask.setBorder(null);
         button_deletetask.setFocusable(false);

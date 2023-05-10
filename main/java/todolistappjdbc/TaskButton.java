@@ -1,12 +1,19 @@
+package todolistappjdbc;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
 
 // task button after the login page
 
+@SuppressWarnings("serial")
 public class TaskButton extends JButton{
-    TaskButton(String usr_task)
+    TaskButton(String usr_task) throws IOException
     {
-        ImageIcon imtask = new ImageIcon( new ImageIcon("./images/task.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+    	InputStream stream = this.getClass().getClassLoader().getResourceAsStream("task.png");
+        ImageIcon imtask = new ImageIcon( new ImageIcon(ImageIO.read(stream)).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         this.setIconTextGap(5);
         this.setText(usr_task);
         this.setBorder(null);
