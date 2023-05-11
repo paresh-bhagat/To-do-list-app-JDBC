@@ -10,7 +10,7 @@
 
 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" name="ds">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/springjdbc" /> 
+		<property name="url" value="jdbc:mysql://localhost:3306/to_do_list_app?createDatabaseIfNotExist=true" /> 
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
@@ -20,4 +20,11 @@
 			<ref bean="ds" />
 		</property>
 	</bean>
+	
+	<bean class="todolistappjdbc.DatabaseApi" name="databaseapi" >
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate" />
+		</property>
+	</bean>
+	
 </beans>

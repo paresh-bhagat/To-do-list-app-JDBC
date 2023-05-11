@@ -5,13 +5,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class Main {
+	
     static LoginFrame frame;
+    static ApplicationContext context;
     static DatabaseApi database;
     
     // action for register button when clicked
     //
-    public static void register( RegisterPage register_panel ) throws SQLException, ClassNotFoundException {
+    public static void register( RegisterPage register_panel ) {
 
         int result = database.check_userid(register_panel.textbox_newus.getText());
         // if username is already taken
@@ -22,7 +27,10 @@ public class Main {
         {
             // add new user
             String PasswordTyped = new String(register_panel.textbox_newpwd.getPassword());
-            database.add_new_account(register_panel.textbox_newus.getText(),PasswordTyped);
+            UserInfo temp = new UserInfo();
+            temp.setUser_id(register_panel.textbox_newus.getText());
+            temp.setUser_password(PasswordTyped);
+            database.add_new_account(temp);
             register_panel.button_newregister.setVisible(false);
             register_panel.text_registered.setVisible(true);
         }
@@ -42,13 +50,7 @@ public class Main {
         // set action for register button
 
         register_panel.button_newregister.addActionListener( e -> { register_panel.text_takenu.setVisible(false);
-            register_panel.text_registered.setVisible(false);
-            try {
-                register(register_panel);
-            } catch (SQLException | ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
-        } );
+            	register_panel.text_registered.setVisible(false); register(register_panel);} );
 
         register_panel.button_loginmenu.addActionListener( e -> { register_panel.setVisible(false);
             frame.panel1.setVisible(true); frame.panel2.setVisible(true); frame.text_wup.setVisible(false);} );
@@ -61,6 +63,14 @@ public class Main {
                 String new_task = panel_taskedit.textbox_taskname.getText();
 
                 if( task.equals("0") && database.check_task_exist(usr_name, new_task) == 0 ){
+                			Task temp = new Task();
+                			temp.setTask(panel_taskedit.textbox_taskname.getText());
+                			temp.setTask_details(panel_taskedit.textbox_taskdetails.getText());
+                			temp.setStart_date(null);
+                			temp.setStart_time(null);
+                			temp.setEnd_date(null);
+                			temp.setEnd_time(null);
+                			
                             database.add_task(usr_name, panel_taskedit.textbox_taskname.getText(),
                                     panel_taskedit.textbox_taskdetails.getText(),
                                     panel_taskedit.textbox_startdate.getText(),
@@ -198,16 +208,11 @@ public class Main {
             // button for delete user
 
             task_panel.button_delact.addActionListener(e -> { task_panel.setVisible(false); taskview_panel.setVisible(false);
-                try {
+                
                     database.remove_user_userinfo(usr_name);
                     database.drop_table_user(usr_name);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-
-                frame.panel1.setVisible(true); frame.panel2.setVisible(true);});
-
-
+                    frame.panel1.setVisible(true); 
+                    frame.panel2.setVisible(true);});
 
             frame.add(task_panel);
             frame.add(taskview_panel);
@@ -217,7 +222,7 @@ public class Main {
             task_panel.button_addtask.addActionListener( e -> { task_panel.setVisible(false); taskview_panel.setVisible(false);
                 try {
                     add_edit_task(usr_name,"0");
-                } catch (SQLException | IOException ex) {
+                } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
             } );
@@ -227,7 +232,7 @@ public class Main {
             task_panel.button_changepswd.addActionListener( e -> { task_panel.setVisible(false); taskview_panel.setVisible(false);
                 try {
                     change_password(usr_name);
-                } catch (SQLException | IOException ex) {
+                } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
             } );
@@ -299,12 +304,11 @@ public class Main {
 
         change_panel.button_changepassword.addActionListener(
                 e -> { String PasswordTyped = new String(change_panel.textbox_newpwd.getPassword());
-
-                    try {
-                        database.change_password(PasswordTyped,usr_name);
-                    } catch (Exception ex) {
-                        throw new RuntimeException(ex);
-                    }
+                		UserInfo temp = new UserInfo();
+                		temp.setUser_id(usr_name);
+                		temp.setUser_password(PasswordTyped);
+                        database.change_password(temp);
+                   
                     change_panel.button_changepassword.setVisible(false);
                     change_panel.text_changed.setVisible(true);}
         );
@@ -313,7 +317,6 @@ public class Main {
         change_panel.button_back.addActionListener( e -> { change_panel.setVisible(false); try {
 			task_page(usr_name);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}} );
     }
@@ -322,23 +325,12 @@ public class Main {
     	frame = new LoginFrame();
     	
         // connect to to-do-app-list-database
-        String mysql_username = "root";
-        String mysql_password = "root";
-        database = new DatabaseApi(mysql_username,mysql_password);
-        database.CreateDatabase();
-        database.ConnectDatabase();
-        database.CreateTable();
-
+        context = new ClassPathXmlApplicationContext("todolistappjdbc/config.xml");
+        database = context.getBean("databaseapi",DatabaseApi.class);
+       
         // set action for login and register button
 
         frame.button_login.addActionListener( e -> check_user() );
-        frame.button_register.addActionListener( e -> {
-			try {
-				register_page();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		} );
+        frame.button_register.addActionListener( e -> register_page() );
     }
 }
