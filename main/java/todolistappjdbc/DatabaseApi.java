@@ -1,5 +1,4 @@
 package todolistappjdbc;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,10 +49,10 @@ public class DatabaseApi{
         String query = "CREATE TABLE to_do_list_app." + userid + "_task(" +
                 "task VARCHAR(25) not NULL, " +
                 " details VARCHAR(100), " +
-                " start_date VARCHAR(20), " +
-                " start_time VARCHAR(20), " +
-                " end_date VARCHAR(20), " +
-                " end_time VARCHAR(20), " +
+                " start_date DATE, " +
+                " start_time TIME, " +
+                " end_date DATE, " +
+                " end_time TIME, " +
                 " PRIMARY KEY ( task ))";
         this.jdbctemplate.update(query);
     }
@@ -75,7 +74,7 @@ public class DatabaseApi{
 
     // get user_password from user id
     
-    public String get_userpassword(String userid) throws SQLException {
+    public String get_userpassword(String userid) {
         
         String query = "SELECT * from to_do_list_app.user_info WHERE user_id=?;";
         RowMapper<UserInfo> rowMapper = new RowMapperUserInfo();
@@ -101,7 +100,7 @@ public class DatabaseApi{
 
     // get all tasks of a user
     
-    public List<String> get_all_task(String usr_name) throws SQLException {
+    public List<String> get_all_task(String usr_name) {
        
         String query = "SELECT * from to_do_list_app." + usr_name + "_task;";
         
@@ -118,11 +117,11 @@ public class DatabaseApi{
 
     // add task of a user
 
-    public void add_task(String usr_name, String taskname, String taskdetails,String startdate,String starttime,
-                         String enddate,String endtime) {
+    public void add_task(String usr_name, Task task) {
        
         String query = "INSERT INTO to_do_list_app." + usr_name + "_task" + " VALUES (?,?,?,?,?,?);";
-        this.jdbctemplate.update(query,taskname,taskdetails,startdate,starttime,enddate,endtime);
+        this.jdbctemplate.update(query,task.getTask(),task.getTask_details(),task.getStart_date(),task.getStart_time(),
+        		task.getEnd_date(),task.getEnd_time());
     }
 
     // get all details of a task
@@ -139,12 +138,12 @@ public class DatabaseApi{
 
     //update a task
 
-    public void update_task(String usr_name, String taskname, String taskdetails,String startdate,String starttime,
-                            String enddate,String endtime, String task) {
+    public void update_task(String usr_name, Task newtask ,String task) {
 
         String query = "UPDATE to_do_list_app." + usr_name + "_task" + " SET task = ?, " +
                 "details = ?, start_date = ?, start_time = ?, end_date = ?, end_time = ? WHERE task = ?;";
-        this.jdbctemplate.update(query,taskname,taskdetails,startdate,starttime,enddate,endtime,task);
+        this.jdbctemplate.update(query,newtask.getTask(),newtask.getTask_details(),newtask.getStart_date(),
+        		newtask.getStart_time(),newtask.getEnd_date(),newtask.getEnd_time(),task);
     }
 
     //delete a task

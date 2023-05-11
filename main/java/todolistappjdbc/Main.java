@@ -15,7 +15,7 @@ public class Main {
     static DatabaseApi database;
     
     // action for register button when clicked
-    //
+    
     public static void register( RegisterPage register_panel ) {
 
         int result = database.check_userid(register_panel.textbox_newus.getText());
@@ -37,6 +37,7 @@ public class Main {
     }
 
     // register user page
+    
     public static void register_page() throws IOException
     {
         // remove login panel and put register page panel
@@ -57,37 +58,28 @@ public class Main {
     }
 
     // action for add task for button click
+    
     public static void add_task_button(String usr_name,String task,TaskEdit panel_taskedit){
 
         try {
                 String new_task = panel_taskedit.textbox_taskname.getText();
-
-                if( task.equals("0") && database.check_task_exist(usr_name, new_task) == 0 ){
-                			Task temp = new Task();
-                			temp.setTask(panel_taskedit.textbox_taskname.getText());
-                			temp.setTask_details(panel_taskedit.textbox_taskdetails.getText());
-                			temp.setStart_date(null);
-                			temp.setStart_time(null);
-                			temp.setEnd_date(null);
-                			temp.setEnd_time(null);
+                
+                Task temp = new Task();
+    			temp.setTask(panel_taskedit.textbox_taskname.getText());
+    			temp.setTask_details(panel_taskedit.textbox_taskdetails.getText());
+    			temp.setStart_date(new SimpleDateFormat("dd-MM-yyyy").parse(panel_taskedit.textbox_startdate.getText()));
+    			temp.setStart_time(new SimpleDateFormat("HH:mm").parse(panel_taskedit.textbox_starttime.getText()));
+    			temp.setEnd_date(new SimpleDateFormat("dd-MM-yyyy").parse(panel_taskedit.textbox_enddate.getText()));
+    			temp.setEnd_time(new SimpleDateFormat("HH:mm").parse(panel_taskedit.textbox_endtime.getText()));
+    			
+                if( task==null && database.check_task_exist(usr_name, new_task) == 0 ){
                 			
-                            database.add_task(usr_name, panel_taskedit.textbox_taskname.getText(),
-                                    panel_taskedit.textbox_taskdetails.getText(),
-                                    panel_taskedit.textbox_startdate.getText(),
-                                    panel_taskedit.textbox_starttime.getText(),
-                                    panel_taskedit.textbox_enddate.getText(),
-                                    panel_taskedit.textbox_endtime.getText());
-                    panel_taskedit.text_tasksaved.setVisible(true);
+                	database.add_task(usr_name, temp);
+                	panel_taskedit.text_tasksaved.setVisible(true);
 
                 }
                 else if ( task.equals(new_task) || database.check_task_exist(usr_name, new_task) == 0) {
-                    database.update_task(usr_name,panel_taskedit.textbox_taskname.getText(),
-                            panel_taskedit.textbox_taskdetails.getText(),
-                            panel_taskedit.textbox_startdate.getText(),
-                            panel_taskedit.textbox_starttime.getText(),
-                            panel_taskedit.textbox_enddate.getText(),
-                            panel_taskedit.textbox_endtime.getText(),
-                            task);
+                    database.update_task(usr_name,temp,task);
                     panel_taskedit.text_tasksaved.setVisible(true);
                 }
                 else {
@@ -104,10 +96,11 @@ public class Main {
     }
 
     // open a task for editing or deleting
+    
     public static void add_edit_task(String usr_name, String task) throws SQLException, IOException {
         TaskEdit panel_taskedit;
 
-        if (task.equals("0"))
+        if (task==null)
         {
         	Date date = new Date();
         	SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm");
@@ -122,16 +115,19 @@ public class Main {
         }
         else {
 
-            List<String> task_info;
+            Task task_info;
             try{
                 task_info = database.get_task_details(usr_name, task);
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
-
-
-            panel_taskedit = new TaskEdit( task,task_info.get(0) ,task_info.get(1),task_info.get(2),
-                    task_info.get(3), task_info.get(4));
+            
+            SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm");
+    		SimpleDateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy");
+            
+            panel_taskedit = new TaskEdit( task,task_info.getTask_details(),formatDate.format(task_info.getStart_date()),
+            		formatTime.format(task_info.getStart_time()), formatDate.format(task_info.getStart_date()) ,
+            		formatTime.format(task_info.getEnd_time()) );
         }
         frame.add(panel_taskedit);
 
@@ -144,7 +140,7 @@ public class Main {
 
         panel_taskedit.button_save.addActionListener(e -> add_task_button(usr_name,task,panel_taskedit));
 
-        if (!task.equals("0"))
+        if (task!=null)
         {
             // button to delete this task
             panel_taskedit.button_deletetask.setVisible(true);
@@ -170,6 +166,7 @@ public class Main {
     }
 
     // go to task page if credentials are correct or come back to tasks page
+    
     public static void task_page( String usr_name) throws IOException
     {
         TaskPage task_panel = new TaskPage(usr_name);
@@ -221,8 +218,8 @@ public class Main {
 
             task_panel.button_addtask.addActionListener( e -> { task_panel.setVisible(false); taskview_panel.setVisible(false);
                 try {
-                    add_edit_task(usr_name,"0");
-                } catch (IOException ex) {
+                    add_edit_task(usr_name,null);
+                } catch (IOException | SQLException ex) {
                     throw new RuntimeException(ex);
                 }
             } );
@@ -232,7 +229,7 @@ public class Main {
             task_panel.button_changepswd.addActionListener( e -> { task_panel.setVisible(false); taskview_panel.setVisible(false);
                 try {
                     change_password(usr_name);
-                } catch (IOException ex) {
+                } catch (IOException | SQLException ex) {
                     throw new RuntimeException(ex);
                 }
             } );
@@ -250,6 +247,7 @@ public class Main {
     }
 
     // check user credentials and if true open task page
+    
     public static void check_user()
     {
         frame.text_wup.setVisible(false);
@@ -291,7 +289,9 @@ public class Main {
             throw new RuntimeException(e);
         }
     }
+    
     // function to change password of user
+    
     public static void change_password(String usr_name) throws SQLException, IOException {
 
         // create panel for change_password
@@ -325,12 +325,21 @@ public class Main {
     	frame = new LoginFrame();
     	
         // connect to to-do-app-list-database
+    	
         context = new ClassPathXmlApplicationContext("todolistappjdbc/config.xml");
         database = context.getBean("databaseapi",DatabaseApi.class);
-       
+        database.CreateTable();
+        
         // set action for login and register button
 
         frame.button_login.addActionListener( e -> check_user() );
-        frame.button_register.addActionListener( e -> register_page() );
+        frame.button_register.addActionListener( e -> {
+			try {
+				register_page();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} );
     }
 }

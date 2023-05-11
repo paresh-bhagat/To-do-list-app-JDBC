@@ -11,11 +11,15 @@ public class RowMapperUserInfo implements RowMapper<UserInfo>{
 	public UserInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
 		// TODO Auto-generated method stub
 		
-		UserInfo temp = new UserInfo();
-		temp.setUser_id(rs.getString(1));
-		temp.setUser_password(rs.getString(2));
+		if(rs.next())
+		{
+			UserInfo temp = new UserInfo();
+			temp.setUser_id(rs.getString(1));
+			temp.setUser_password(rs.getString(2));
+			return temp;
+		}
 		
-		return temp;
+		return null;
 	}
 
 }
