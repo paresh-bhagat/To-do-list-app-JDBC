@@ -2,6 +2,7 @@ package todolistappjdbc;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -33,11 +34,15 @@ public class DatabaseApi{
         
         RowMapper<UserInfo> rowMapper = new RowMapperUserInfo();
         
-        UserInfo temp = this.jdbctemplate.queryForObject( query ,rowMapper , userid);
+        try {
+        	UserInfo temp = this.jdbctemplate.queryForObject( query ,rowMapper , userid);
+        }
+        catch(EmptyResultDataAccessException e) {
+        	return 0;
+        }
         
-        if (temp!=null )
-            return 1;
-        return 0;
+        return 1;
+        
     }
 
     // create new user in database
@@ -161,11 +166,16 @@ public class DatabaseApi{
         String query = "SELECT * FROM to_do_list_app." + usr_name + "_task" + " WHERE task=?;";
         
         RowMapper<Task> rowMapper = new RowMapperTask();
-        Task temp = this.jdbctemplate.queryForObject( query ,rowMapper , task);
         
-        if(temp!=null)
-            return 1;
-        return 0;
+        try {
+        	Task temp = this.jdbctemplate.queryForObject( query ,rowMapper , task);
+        }
+        catch(EmptyResultDataAccessException e) {
+        	return 0;
+        }
+        
+        return 1;
+        
     }
 
 }

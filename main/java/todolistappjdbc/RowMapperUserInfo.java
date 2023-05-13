@@ -9,17 +9,11 @@ public class RowMapperUserInfo implements RowMapper<UserInfo>{
 
 	@Override
 	public UserInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
-		// TODO Auto-generated method stub
 		
-		if(rs.next())
-		{
-			UserInfo temp = new UserInfo();
-			temp.setUser_id(rs.getString(1));
-			temp.setUser_password(rs.getString(2));
-			return temp;
-		}
-		
-		return null;
+		UserInfo temp = new UserInfo();
+		temp.setUser_id(rs.getString(1));
+		temp.setUser_password(rs.getString(2));
+		return temp;
 	}
 
 }
