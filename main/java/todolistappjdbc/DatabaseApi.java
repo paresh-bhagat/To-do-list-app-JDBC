@@ -100,7 +100,7 @@ public class DatabaseApi{
     public void drop_table_user(String usr_name) {
 
         String query = "DROP TABLE to_do_list_app." + usr_name + "_task;" ;
-        this.jdbctemplate.update(query,usr_name);
+        this.jdbctemplate.update(query);
     }
 
     // get all tasks of a user
@@ -125,8 +125,8 @@ public class DatabaseApi{
     public void add_task(String usr_name, Task task) {
        
         String query = "INSERT INTO to_do_list_app." + usr_name + "_task" + " VALUES (?,?,?,?,?,?);";
-        this.jdbctemplate.update(query,task.getTask(),task.getTask_details(),task.getStart_date(),task.getStart_time(),
-        		task.getEnd_date(),task.getEnd_time());
+        this.jdbctemplate.update(query,task.getTask(),task.getTask_details(),task.getStart_date(),
+        		task.getStart_time(), task.getEnd_date(),task.getEnd_time());
     }
 
     // get all details of a task

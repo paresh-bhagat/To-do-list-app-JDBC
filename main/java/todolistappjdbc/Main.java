@@ -72,7 +72,7 @@ public class Main {
     			temp.setEnd_date(new SimpleDateFormat("dd-MM-yyyy").parse(panel_taskedit.textbox_enddate.getText()));
     			temp.setEnd_time(new SimpleDateFormat("HH:mm").parse(panel_taskedit.textbox_endtime.getText()));
     			
-                if( task==null && database.check_task_exist(usr_name, new_task) == 0 ){
+                if( task=="0" && ( database.check_task_exist(usr_name, new_task) == 0 ) ){
                 			
                 	database.add_task(usr_name, temp);
                 	panel_taskedit.text_tasksaved.setVisible(true);
@@ -100,7 +100,7 @@ public class Main {
     public static void add_edit_task(String usr_name, String task) throws SQLException, IOException {
         TaskEdit panel_taskedit;
 
-        if (task==null)
+        if (task=="0")
         {
         	Date date = new Date();
         	SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm");
@@ -116,11 +116,8 @@ public class Main {
         else {
 
             Task task_info;
-            try{
-                task_info = database.get_task_details(usr_name, task);
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
+            
+            task_info = database.get_task_details(usr_name, task);
             
             SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm");
     		SimpleDateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy");
@@ -140,7 +137,7 @@ public class Main {
 
         panel_taskedit.button_save.addActionListener(e -> add_task_button(usr_name,task,panel_taskedit));
 
-        if (task!=null)
+        if (task!="0")
         {
             // button to delete this task
             panel_taskedit.button_deletetask.setVisible(true);
@@ -190,12 +187,11 @@ public class Main {
                     button_t.addActionListener(e -> {
                         task_panel.setVisible(false);
                         taskview_panel.setVisible(false);
-                        try {
-                            add_edit_task(usr_name, temp_s);
-                        } catch (Exception ex) {
-                            throw new RuntimeException(ex);
-                        }
-                    });
+                       try {
+						add_edit_task(usr_name, temp_s);
+					} catch (SQLException | IOException e1) {
+						e1.printStackTrace();
+					} });
                     // Printing keys
                     taskview_panel.add(button_t);
                 }
@@ -218,7 +214,7 @@ public class Main {
 
             task_panel.button_addtask.addActionListener( e -> { task_panel.setVisible(false); taskview_panel.setVisible(false);
                 try {
-                    add_edit_task(usr_name,null);
+                    add_edit_task(usr_name,"0");
                 } catch (IOException | SQLException ex) {
                     throw new RuntimeException(ex);
                 }
